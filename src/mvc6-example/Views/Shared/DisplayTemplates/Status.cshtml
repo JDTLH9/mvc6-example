@@ -1,0 +1,5 @@
+﻿@model mvc6_example.Models.Status
+<div class="status-panel row">
+    <div class="col-md-1 label label-@Model.Style">@Model.Style</div>
+    <div class="col-md-10 label label-default">@Html.DisplayFor(m => m.Message)</div>
+</div>

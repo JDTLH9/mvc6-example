@@ -1,0 +1,9 @@
+﻿@using mvc6_example.Models
+@model HomeModel
+@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-default">Hello @Html.DisplayFor(m => m.Greeting)</div>
+
+@Html.DisplayFor(m => m.Statuses)
