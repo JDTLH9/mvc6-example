@@ -11,31 +11,26 @@ namespace mvc6_example
         public static void Main(string[] args)
         {
             var isDebug = Debugger.IsAttached || ((IList)args).Contains("--debug");
+            string runPath;
 
             if (isDebug)
-            {
-                var host = new WebHostBuilder()
-                     .UseKestrel()
-                     .UseContentRoot(Directory.GetCurrentDirectory())
-                     .UseIISIntegration()
-                     .UseStartup<Startup>()
-                     .Build();
-
-                host.Run();
-            }
+                runPath = Directory.GetCurrentDirectory();
             else
             {
                 var exePath = Process.GetCurrentProcess().MainModule.FileName;
-                var directoryPath = Path.GetDirectoryName(exePath);
-
-                var host = new WebHostBuilder()
-                                .UseKestrel()
-                                .UseContentRoot(directoryPath)
-                                .UseStartup<Startup>()
-                                .Build();
-
-                host.RunAsService();
+                runPath = Path.GetDirectoryName(exePath);
             }
+
+            var host = new WebHostBuilder()
+                            .UseKestrel()
+                            .UseContentRoot(runPath)
+                            .UseStartup<Startup>()
+                            .Build();
+
+            if (isDebug)
+                host.Run();
+            else
+                host.RunAsService();
         }
     }
 }
