@@ -6,6 +6,7 @@ ServiceOutputs
 /dependencies/*
 artifacts
 .DS_Store
+.vs
 
 #NuGet
 packages/
